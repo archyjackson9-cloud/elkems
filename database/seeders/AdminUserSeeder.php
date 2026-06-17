@@ -21,14 +21,14 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $email = env('ADMIN_EMAIL', 'admin@eldsolutions.com');
+        $email = env('ADMIN_EMAIL', 'florentinakemevor@gmail.com');
 
         User::updateOrCreate(
             ['email' => $email],
             [
                 'name'     => env('ADMIN_NAME', 'ELD Admin'),
                 'email'    => $email,
-                'password' => Hash::make(env('ADMIN_PASSWORD', 'Admin@2024!')),
+                'password' => Hash::make(env('ADMIN_PASSWORD', 'P@$$Word2025')),
                 'email_verified_at' => now(),
             ]
         );
