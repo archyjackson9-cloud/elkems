@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e;
+
+echo "Running after.pull hook from ${APPLICATION_ROOT}";
+
+# Composer
+echo "Running composer install...";
+composer install --no-dev --no-interaction --optimize-autoloader --no-progress;
+
+# NPM (if you use it)
+if [ -f "package.json" ]; then
+    echo "Running npm install...";
+    npm ci --only=production --no-audit --no-progress;
+fi
+
+# Laravel optimizations
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Storage symlink (most important for your issue)
+echo "Creating public/storage symlink...";
+ln --symbolic --force --no-dereference /webroot/storage/public "${APPLICATION_ROOT}/public/storage";
+
+echo "after.pull hook completed successfully.";

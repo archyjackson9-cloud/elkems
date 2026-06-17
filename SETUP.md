@@ -115,13 +115,8 @@ chmod -R 775 storage bootstrap/cache
 | `http://localhost/eldsolutions/public` | Public website |
 | `http://localhost/eldsolutions/public/admin` | Admin CMS |
 
-**Default admin login:**
-- Email: `admin@eldsolutions.com`
-- Password: whatever you set in `ADMIN_PASSWORD`
 
-> ⚠️ Change the admin password immediately after first login via your database or by re-seeding with a strong password.
 
----
 
 ## Mail Configuration Options
 
@@ -162,8 +157,77 @@ MAIL_PASSWORD=your_smtp_key
 
 ---
 
+## Deploying on Amezmo
+
+Amezmo uses **release-based deployments** — each deploy lands in a fresh directory
+(`/webroot/release/deployment_N_xxxxx/`). The `storage/` subdirectory tree does not
+exist by default, which causes Laravel to crash on first boot.
+
+### One-time Amezmo configuration (do this in the Amezmo dashboard)
+
+1. **Add Shared Directories** (Amezmo → App → Shared Directories)
+
+   Add each of these paths so they are symlinked into every new release:
+
+   ```
+   storage/app/public
+   storage/framework/cache/data
+   storage/framework/sessions
+   storage/framework/views
+   storage/logs
+   ```
+
+   Amezmo will keep these directories on a persistent volume and symlink them on
+   every deploy, so uploaded files and logs survive across releases.
+
+2. **Add a Post-Deploy Hook** (Amezmo → App → Deployment → Post-Deploy Script)
+
+   ```bash
+   # Prepare storage directories (idempotent — safe to run every deploy)
+   php artisan storage:prepare
+
+   # Create the public/storage symlink
+   php artisan storage:link --force
+
+   # Warm caches for production
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+### Emergency fix for an already-deployed release
+
+If a release is already live and broken, SSH into the server and run:
+
+```bash
+cd /webroot/release/deployment_N_xxxxxxxx   # ← replace with your real path
+
+mkdir -p storage/app/public
+mkdir -p storage/framework/cache/data
+mkdir -p storage/framework/sessions
+mkdir -p storage/framework/views
+mkdir -p storage/logs
+touch storage/logs/laravel.log
+chmod -R 775 storage bootstrap/cache
+
+php artisan storage:link
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+### Why `storage:prepare` instead of git-committing empty dirs
+
+Git does not track empty directories. The `.gitkeep` files added by `storage:prepare`
+commit the structure so future fresh clones also have the directories. Combined with
+Amezmo's Shared Directories feature, uploaded files persist across releases
+automatically.
+
+---
+
 ## Production Checklist
 
+- [ ] Run `php artisan storage:prepare` (creates storage subdirectories)
 - [ ] Set `APP_DEBUG=false` in `.env`
 - [ ] Set `APP_ENV=production`
 - [ ] Configure real SMTP credentials

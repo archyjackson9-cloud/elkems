@@ -40,11 +40,21 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => '/webroot/storage/public',
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
+            'permissions'=> [  // Amezmo-recommended
+            'file' => [
+                'public' => 0664,
+                'private' => 0664,
+            ],
+            'dir' => [
+                'public' => 0775,  // or 0700 as per their docs
+                'private' => 0700,
+            ],
+        ],
         ],
 
         's3' => [
