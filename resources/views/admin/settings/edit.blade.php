@@ -73,8 +73,17 @@
             </h6>
             <div class="mb-4">
                 <label class="form-label fw-semibold">Google Maps Embed URL</label>
-                <input type="text" name="google_maps_embed" class="form-control" value="{{ old('google_maps_embed', $settings['google_maps_embed']) }}" placeholder="https://maps.google.com/maps?...">
-                <div class="form-text">Paste the embed URL from Google Maps share → Embed a map.</div>
+                <input type="text" name="google_maps_embed" class="form-control" value="{{ old('google_maps_embed', $settings['google_maps_embed']) }}" placeholder="Paste the full &lt;iframe&gt; code or embed URL from Google Maps">
+                <div class="form-text">
+                    In Google Maps: <strong>Share → Embed a map</strong> → copy the full <code>&lt;iframe&gt;…&lt;/iframe&gt;</code> code and paste it here. The system extracts the URL automatically.
+                </div>
+                @if(!empty($settings['google_maps_embed']))
+                <div class="mt-2 rounded overflow-hidden" style="height:180px">
+                    <iframe src="{{ $settings['google_maps_embed'] }}" width="100%" height="180"
+                            style="border:0;display:block" allowfullscreen loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                @endif
             </div>
 
             <div class="d-flex gap-2">
