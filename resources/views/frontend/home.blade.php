@@ -353,6 +353,15 @@
                 </div>
             </div>
         </div>
+
+        @if(!empty($settings['google_maps_embed']))
+        <div class="mt-5 rounded overflow-hidden" style="height:300px">
+            <iframe src="{{ $settings['google_maps_embed'] }}"
+                    width="100%" height="300" style="border:0;display:block"
+                    allowfullscreen loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        @endif
     </div>
 </section>
 
