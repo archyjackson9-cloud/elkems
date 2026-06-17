@@ -42,21 +42,22 @@
             <div class="clients-grid-item">
                 @if($client->website_url)
                     <a href="{{ $client->website_url }}" target="_blank" rel="noopener"
-                       class="client-logo-card text-decoration-none d-flex">
+                       class="client-logo-card text-decoration-none d-flex flex-column align-items-center">
                 @else
-                    <div class="client-logo-card">
+                    <div class="client-logo-card d-flex flex-column align-items-center">
                 @endif
 
                     @if($client->logo)
                         <img src="{{ asset('storage/'.$client->logo) }}"
                              alt="{{ $client->name }}"
                              loading="lazy"
-                             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-                        <span class="logo-text-fallback" style="display:none">{{ $client->name }}</span>
+                             onerror="this.style.display='none'">
+                        <span class="client-name-label">{{ $client->name }}</span>
                     @elseif($client->logo_text)
                         <span class="logo-text-fallback" style="{{ $client->logo_style }}">
                             {!! $client->logo_text !!}
                         </span>
+                        <span class="client-name-label">{{ $client->name }}</span>
                     @else
                         <span class="logo-text-fallback">{{ $client->name }}</span>
                     @endif
@@ -217,21 +218,22 @@
             <div class="clients-grid-item">
                 @if($client->website_url)
                     <a href="{{ $client->website_url }}" target="_blank" rel="noopener"
-                       class="client-logo-card text-decoration-none d-flex">
+                       class="client-logo-card text-decoration-none d-flex flex-column align-items-center">
                 @else
-                    <div class="client-logo-card">
+                    <div class="client-logo-card d-flex flex-column align-items-center">
                 @endif
 
                     @if($client->logo)
                         <img src="{{ asset('storage/'.$client->logo) }}"
                              alt="{{ $client->name }}"
                              loading="lazy"
-                             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-                        <span class="logo-text-fallback" style="display:none">{{ $client->name }}</span>
+                             onerror="this.style.display='none'">
+                        <span class="client-name-label">{{ $client->name }}</span>
                     @elseif($client->logo_text)
                         <span class="logo-text-fallback" style="{{ $client->logo_style }}">
                             {!! $client->logo_text !!}
                         </span>
+                        <span class="client-name-label">{{ $client->name }}</span>
                     @else
                         <span class="logo-text-fallback">{{ $client->name }}</span>
                     @endif
