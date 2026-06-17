@@ -14,6 +14,9 @@ if [ -f "package.json" ]; then
     npm ci --only=production --no-audit --no-progress;
 fi
 
+npm istall
+npm run build
+
 # Laravel optimizations
 php artisan config:cache
 php artisan route:cache

@@ -37,21 +37,30 @@
 <section id="trusted" class="py-5">
     <div class="container">
         <p class="trusted-label text-center mb-4">TRUSTED BY</p>
-        <div class="row g-3 justify-content-center">
-            @foreach($clients->take(6) as $client)
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <div class="clients-grid">
+            @foreach($clients->take(8) as $client)
+            <div class="clients-grid-item">
                 @if($client->website_url)
-                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener" class="client-logo-card text-decoration-none">
+                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener"
+                       class="client-logo-card text-decoration-none d-flex">
                 @else
                     <div class="client-logo-card">
                 @endif
+
                     @if($client->logo)
-                        <img src="{{ asset('storage/'.$client->logo) }}" alt="{{ $client->name }}">
+                        <img src="{{ asset('storage/'.$client->logo) }}"
+                             alt="{{ $client->name }}"
+                             loading="lazy"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="logo-text-fallback" style="display:none">{{ $client->name }}</span>
                     @elseif($client->logo_text)
-                        <span style="{{ $client->logo_style }}">{!! $client->logo_text !!}</span>
+                        <span class="logo-text-fallback" style="{{ $client->logo_style }}">
+                            {!! $client->logo_text !!}
+                        </span>
                     @else
-                        <span class="fw-bold text-muted small">{{ $client->name }}</span>
+                        <span class="logo-text-fallback">{{ $client->name }}</span>
                     @endif
+
                 @if($client->website_url)
                     </a>
                 @else
@@ -203,21 +212,30 @@
         </div>
 
         @if($clients->count())
-        <div class="row g-3 justify-content-center mb-5">
+        <div class="clients-grid mb-5">
             @foreach($clients as $client)
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="clients-grid-item">
                 @if($client->website_url)
-                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener" class="client-logo-card text-decoration-none d-block">
+                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener"
+                       class="client-logo-card text-decoration-none d-flex">
                 @else
                     <div class="client-logo-card">
                 @endif
+
                     @if($client->logo)
-                        <img src="{{ asset('storage/'.$client->logo) }}" alt="{{ $client->name }}">
+                        <img src="{{ asset('storage/'.$client->logo) }}"
+                             alt="{{ $client->name }}"
+                             loading="lazy"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="logo-text-fallback" style="display:none">{{ $client->name }}</span>
                     @elseif($client->logo_text)
-                        <span style="{{ $client->logo_style }}">{!! $client->logo_text !!}</span>
+                        <span class="logo-text-fallback" style="{{ $client->logo_style }}">
+                            {!! $client->logo_text !!}
+                        </span>
                     @else
-                        <span class="fw-semibold text-muted small text-center">{{ $client->name }}</span>
+                        <span class="logo-text-fallback">{{ $client->name }}</span>
                     @endif
+
                 @if($client->website_url)
                     </a>
                 @else
