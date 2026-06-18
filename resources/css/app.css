@@ -138,6 +138,59 @@ a { transition: color .2s, opacity .2s; }
     margin-top: 8px;
     line-height: 1.3;
 }
+/* ---- Partnership Cards ---- */
+.partner-card {
+    background: #fff;
+    border: 1px solid var(--eld-border);
+    border-radius: 12px;
+    padding: 28px;
+    height: 100%;
+    transition: box-shadow .2s, transform .2s;
+}
+.partner-card:hover {
+    box-shadow: 0 6px 24px rgba(61,189,160,.15);
+    transform: translateY(-2px);
+}
+.partner-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+.partner-logo {
+    max-height: 50px;
+    max-width: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.partner-logo-fallback {
+    font-weight: 700;
+    font-size: .85rem;
+    color: #555;
+    flex-shrink: 0;
+}
+.partner-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+.partner-description {
+    font-size: .9rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+.partner-link {
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--eld-teal);
+    text-decoration: none;
+}
+.partner-link:hover { text-decoration: underline; }
+
 /* Centering grid: flex wrap so it centres with few items */
 .clients-grid {
     display: flex;

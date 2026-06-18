@@ -24,6 +24,7 @@ class ClientController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:150',
+            'description' => 'nullable|string|max:1000',
             'logo'        => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:2048',
             'logo_text'   => 'nullable|string|max:255',
             'logo_style'  => 'nullable|string|max:500',
@@ -40,7 +41,7 @@ class ClientController extends Controller
         Client::create($validated);
 
         return redirect()->route('admin.clients.index')
-            ->with('success', 'Client added successfully.');
+            ->with('success', 'Partner added successfully.');
     }
 
     public function edit(Client $client)
@@ -52,6 +53,7 @@ class ClientController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:150',
+            'description' => 'nullable|string|max:1000',
             'logo'        => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:2048',
             'logo_text'   => 'nullable|string|max:255',
             'logo_style'  => 'nullable|string|max:500',
@@ -71,7 +73,7 @@ class ClientController extends Controller
         $client->update($validated);
 
         return redirect()->route('admin.clients.index')
-            ->with('success', 'Client updated successfully.');
+            ->with('success', 'Partner updated successfully.');
     }
 
     public function destroy(Client $client)
@@ -80,6 +82,6 @@ class ClientController extends Controller
             Storage::disk('public')->delete($client->logo);
         }
         $client->delete();
-        return redirect()->route('admin.clients.index')->with('success', 'Client deleted.');
+        return redirect()->route('admin.clients.index')->with('success', 'Partner deleted.');
     }
 }

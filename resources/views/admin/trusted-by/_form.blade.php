@@ -1,0 +1,50 @@
+<div class="row g-3">
+    <div class="col-md-8">
+        <label class="form-label fw-semibold">Organisation Name <span class="text-danger">*</span></label>
+        <input type="text" name="name" class="form-control"
+               value="{{ old('name', $trustedBy->name ?? '') }}" required>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label fw-semibold">Sort Order</label>
+        <input type="number" name="sort_order" class="form-control" min="0"
+               value="{{ old('sort_order', $trustedBy->sort_order ?? 0) }}">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Logo Image</label>
+        @if(isset($trustedBy) && $trustedBy->logo)
+        <div class="mb-2">
+            <img src="{{ asset('storage/'.$trustedBy->logo) }}" alt=""
+                 style="max-height:50px;max-width:120px;object-fit:contain;border:1px solid #eee;padding:4px;border-radius:4px">
+        </div>
+        @endif
+        <input type="file" name="logo" class="form-control" accept="image/*" data-preview="trusted-logo-preview">
+        <img id="trusted-logo-preview" src="#" alt=""
+             style="display:none;max-height:50px;max-width:120px;object-fit:contain;margin-top:8px;border:1px solid #eee;padding:4px;border-radius:4px">
+        <div class="form-text">Upload PNG, JPG, SVG. Max 2 MB. Leave blank to use text.</div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Website URL</label>
+        <input type="url" name="website_url" class="form-control"
+               value="{{ old('website_url', $trustedBy->website_url ?? '') }}" placeholder="https://example.com">
+    </div>
+    <div class="col-md-8">
+        <label class="form-label fw-semibold">Logo Text / HTML (fallback if no image)</label>
+        <input type="text" name="logo_text" class="form-control"
+               value="{{ old('logo_text', $trustedBy->logo_text ?? '') }}"
+               placeholder="e.g. Organisation Name">
+        <div class="form-text">Plain text or simple HTML shown when no image is uploaded.</div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label fw-semibold">Logo Text Style (CSS)</label>
+        <input type="text" name="logo_style" class="form-control"
+               value="{{ old('logo_style', $trustedBy->logo_style ?? '') }}"
+               placeholder="font-weight:700;color:#3DBDA0">
+    </div>
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="is_active" id="trustedActive"
+                   value="1" {{ old('is_active', $trustedBy->is_active ?? true) ? 'checked' : '' }}>
+            <label class="form-check-label" for="trustedActive">Active (visible on website)</label>
+        </div>
+    </div>
+</div>

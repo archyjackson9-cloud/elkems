@@ -98,7 +98,7 @@
                     <i class="bi bi-person-plus me-2"></i> Add Team Member
                 </a>
                 <a href="{{ route('admin.clients.create') }}" class="btn btn-eld-sm text-start">
-                    <i class="bi bi-building-add me-2"></i> Add Client
+                    <i class="bi bi-building-add me-2"></i> Add Partner
                 </a>
                 <a href="{{ route('admin.hero.edit') }}" class="btn btn-outline-secondary btn-sm text-start">
                     <i class="bi bi-pencil me-2"></i> Edit Hero Section

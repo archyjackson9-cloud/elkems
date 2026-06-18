@@ -7,6 +7,7 @@ use App\Models\AboutSection;
 use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Client;
+use App\Models\TrustedBy;
 use App\Models\Setting;
 
 class HomeController extends Controller
@@ -17,7 +18,8 @@ class HomeController extends Controller
         $about   = AboutSection::singleton();
         $services = Service::active()->get();
         $team    = TeamMember::active()->get();
-        $clients = Client::active()->get();
+        $clients   = Client::active()->get();
+        $trustedBys = TrustedBy::active()->get();
         $settings = [
             'phone'             => Setting::get('phone', '+233 XX XXX XXXX'),
             'email'             => Setting::get('email', 'info@eldsolutions.com'),
@@ -29,7 +31,7 @@ class HomeController extends Controller
         ];
 
         return view('frontend.home', compact(
-            'hero', 'about', 'services', 'team', 'clients', 'settings'
+            'hero', 'about', 'services', 'team', 'clients', 'trustedBys', 'settings'
         ));
     }
 }

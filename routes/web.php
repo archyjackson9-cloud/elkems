@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\TrustedByController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ForgotPasswordController;
@@ -60,8 +61,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Team (route model binding key = 'team')
         Route::resource('team', TeamController::class)->except(['show']);
 
-        // Clients
+        // Partnerships (formerly Clients)
         Route::resource('clients', ClientController::class)->except(['show']);
+
+        // Trusted By
+        Route::resource('trusted-by', TrustedByController::class)->except(['show'])
+            ->parameters(['trusted-by' => 'trustedBy']);
 
         // Messages
         Route::get('messages',              [MessageController::class, 'index'])->name('messages.index');

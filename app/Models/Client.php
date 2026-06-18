@@ -8,6 +8,7 @@ class Client extends Model
 {
     protected $fillable = [
         'name',
+        'description',
         'logo',
         'logo_text',
         'logo_style',

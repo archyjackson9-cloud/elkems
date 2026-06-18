@@ -1,6 +1,6 @@
 <div class="row g-3">
     <div class="col-md-8">
-        <label class="form-label fw-semibold">Client / Organisation Name <span class="text-danger">*</span></label>
+        <label class="form-label fw-semibold">Partner / Organisation Name <span class="text-danger">*</span></label>
         <input type="text" name="name" class="form-control"
                value="{{ old('name', $client->name ?? '') }}" required>
     </div>
@@ -8,6 +8,11 @@
         <label class="form-label fw-semibold">Sort Order</label>
         <input type="number" name="sort_order" class="form-control" min="0"
                value="{{ old('sort_order', $client->sort_order ?? 0) }}">
+    </div>
+    <div class="col-12">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea name="description" class="form-control" rows="3"
+                  placeholder="Brief profile or description of this partner">{{ old('description', $client->description ?? '') }}</textarea>
     </div>
     <div class="col-md-6">
         <label class="form-label fw-semibold">Logo Image</label>

@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'Clients')
-@section('page-title', 'Clients')
+@section('title', 'Partnerships')
+@section('page-title', 'Partnerships')
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h6 class="mb-0 fw-semibold text-muted">{{ $clients->count() }} client(s)</h6>
+    <h6 class="mb-0 fw-semibold text-muted">{{ $clients->count() }} partner(s)</h6>
     <a href="{{ route('admin.clients.create') }}" class="btn btn-eld-sm">
-        <i class="bi bi-plus-circle me-1"></i> Add Client
+        <i class="bi bi-plus-circle me-1"></i> Add Partner
     </a>
 </div>
 
@@ -17,6 +17,7 @@
                 <tr>
                     <th>Logo</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Website</th>
                     <th>Order</th>
                     <th>Status</th>
@@ -37,6 +38,7 @@
                         @endif
                     </td>
                     <td class="fw-semibold">{{ $client->name }}</td>
+                    <td class="small text-muted">{{ Str::limit($client->description, 60) }}</td>
                     <td>
                         @if($client->website_url)
                         <a href="{{ $client->website_url }}" target="_blank" class="text-eld small">
@@ -64,8 +66,8 @@
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="6" class="text-center text-muted py-5">
-                    No clients yet. <a href="{{ route('admin.clients.create') }}">Add one</a>.
+                <tr><td colspan="7" class="text-center text-muted py-5">
+                    No partners yet. <a href="{{ route('admin.clients.create') }}">Add one</a>.
                 </td></tr>
                 @endforelse
             </tbody>

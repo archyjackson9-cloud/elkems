@@ -51,7 +51,11 @@
         </a>
         <a href="{{ route('admin.clients.index') }}"
            class="nav-link {{ request()->routeIs('admin.clients*') ? 'active' : '' }}">
-            <i class="bi bi-building-check"></i> Clients
+            <i class="bi bi-building-check"></i> Partnerships
+        </a>
+        <a href="{{ route('admin.trusted-by.index') }}"
+           class="nav-link {{ request()->routeIs('admin.trusted-by*') ? 'active' : '' }}">
+            <i class="bi bi-patch-check"></i> Trusted By
         </a>
 
         <div class="nav-section">Enquiries</div>

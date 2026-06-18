@@ -33,36 +33,36 @@
 {{-- ===================================================
      TRUSTED BY
 ===================================================== --}}
-@if($clients->count())
+@if($trustedBys->count())
 <section id="trusted" class="py-5">
     <div class="container">
         <p class="trusted-label text-center mb-4">TRUSTED BY</p>
         <div class="clients-grid">
-            @foreach($clients->take(8) as $client)
+            @foreach($trustedBys->take(8) as $item)
             <div class="clients-grid-item">
-                @if($client->website_url)
-                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener"
+                @if($item->website_url)
+                    <a href="{{ $item->website_url }}" target="_blank" rel="noopener"
                        class="client-logo-card text-decoration-none d-flex flex-column align-items-center">
                 @else
                     <div class="client-logo-card d-flex flex-column align-items-center">
                 @endif
 
-                    @if($client->logo)
-                        <img src="{{ asset('storage/'.$client->logo) }}"
-                             alt="{{ $client->name }}"
+                    @if($item->logo)
+                        <img src="{{ asset('storage/'.$item->logo) }}"
+                             alt="{{ $item->name }}"
                              loading="lazy"
                              onerror="this.style.display='none'">
-                        <span class="client-name-label">{{ $client->name }}</span>
-                    @elseif($client->logo_text)
-                        <span class="logo-text-fallback" style="{{ $client->logo_style }}">
-                            {!! $client->logo_text !!}
+                        <span class="client-name-label">{{ $item->name }}</span>
+                    @elseif($item->logo_text)
+                        <span class="logo-text-fallback" style="{{ $item->logo_style }}">
+                            {!! $item->logo_text !!}
                         </span>
-                        <span class="client-name-label">{{ $client->name }}</span>
+                        <span class="client-name-label">{{ $item->name }}</span>
                     @else
-                        <span class="logo-text-fallback">{{ $client->name }}</span>
+                        <span class="logo-text-fallback">{{ $item->name }}</span>
                     @endif
 
-                @if($client->website_url)
+                @if($item->website_url)
                     </a>
                 @else
                     </div>
@@ -203,51 +203,50 @@
 
 
 {{-- ===================================================
-     CLIENTS (Full Section)
+     PARTNERSHIPS (Full Section)
 ===================================================== --}}
 <section id="clients" class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-heading">Our Clients</h2>
+            <h2 class="section-heading">Partnerships</h2>
             <p class="section-sub mt-3">We are proud to have partnered with leading organizations across Ghana and beyond.</p>
         </div>
 
         @if($clients->count())
-        <div class="clients-grid mb-5">
+        <div class="row g-4 mb-5">
             @foreach($clients as $client)
-            <div class="clients-grid-item">
-                @if($client->website_url)
-                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener"
-                       class="client-logo-card text-decoration-none d-flex flex-column align-items-center">
-                @else
-                    <div class="client-logo-card d-flex flex-column align-items-center">
-                @endif
-
-                    @if($client->logo)
-                        <img src="{{ asset('storage/'.$client->logo) }}"
-                             alt="{{ $client->name }}"
-                             loading="lazy"
-                             onerror="this.style.display='none'">
-                        <span class="client-name-label">{{ $client->name }}</span>
-                    @elseif($client->logo_text)
-                        <span class="logo-text-fallback" style="{{ $client->logo_style }}">
-                            {!! $client->logo_text !!}
-                        </span>
-                        <span class="client-name-label">{{ $client->name }}</span>
-                    @else
-                        <span class="logo-text-fallback">{{ $client->name }}</span>
-                    @endif
-
-                @if($client->website_url)
-                    </a>
-                @else
+            <div class="col-md-6">
+                <div class="partner-card">
+                    <div class="partner-card-header">
+                        @if($client->logo)
+                            <img src="{{ asset('storage/'.$client->logo) }}"
+                                 alt="{{ $client->name }}" class="partner-logo"
+                                 loading="lazy"
+                                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                            <span class="partner-logo-fallback" style="display:none">{{ $client->name }}</span>
+                        @elseif($client->logo_text)
+                            <span class="partner-logo-fallback" style="{{ $client->logo_style }}">
+                                {!! $client->logo_text !!}
+                            </span>
+                        @else
+                            <span class="partner-logo-fallback">{{ $client->name }}</span>
+                        @endif
+                        <h5 class="partner-name">{{ $client->name }}</h5>
                     </div>
-                @endif
+                    @if($client->description)
+                    <p class="partner-description">{{ $client->description }}</p>
+                    @endif
+                    @if($client->website_url)
+                    <a href="{{ $client->website_url }}" target="_blank" rel="noopener" class="partner-link">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Visit Website
+                    </a>
+                    @endif
+                </div>
             </div>
             @endforeach
         </div>
         @else
-        <p class="text-center text-muted mb-5">Client information coming soon.</p>
+        <p class="text-center text-muted mb-5">Partnership information coming soon.</p>
         @endif
     </div>
 
