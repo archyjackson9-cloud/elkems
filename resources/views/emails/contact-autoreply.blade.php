@@ -24,7 +24,7 @@
     </div>
     <div class="body">
         <p>Dear <strong>{{ $contactMessage->name }}</strong>,</p>
-        <p>Thank you for reaching out to us. We have received your message and our team will get back to you within <strong>1–2 business days</strong>.</p>
+        <p>Thank you for reaching out to us. We have received your message and our team will get back to you shortly.</p>
 
         <hr class="divider">
         <p style="font-size:13px; color:#888; margin-bottom:8px;">Your message summary:</p>
