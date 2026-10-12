@@ -1,10 +1,9 @@
-# Deploy with Hostinger Docker Manager (compose from this repo).
+# Deploy with Hostinger Docker Manager. It pulls a prebuilt public image (APP_IMAGE); it cannot build from source.
+# Build/push the image with docker-compose.build.yml (see DEPLOY.md).
 # Set the variables below in the Docker Manager environment section (see .env.docker.example).
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: "${APP_IMAGE:?Set APP_IMAGE, e.g. ghcr.io/archyjackson9-cloud/eldsolutions:latest}"
     container_name: eldsolutions-app
     restart: unless-stopped
     depends_on:
