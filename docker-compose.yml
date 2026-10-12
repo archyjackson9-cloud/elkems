@@ -3,7 +3,7 @@
 # Set the variables below in the Docker Manager environment section (see .env.docker.example).
 services:
   app:
-    image: "${APP_IMAGE:?Set APP_IMAGE, e.g. ghcr.io/archyjackson9-cloud/eldsolutions:latest}"
+    image: "${APP_IMAGE:-ghcr.io/archyjackson9-cloud/eldsolutions:latest}"
     container_name: eldsolutions-app
     restart: unless-stopped
     depends_on:
