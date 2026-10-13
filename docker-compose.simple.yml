@@ -1,0 +1,56 @@
+# Minimal compose for Hostinger Docker Manager: paste this YAML into Docker Manager directly.
+# Replace every CHANGE_ME value. DO NOT commit real passwords/keys to a public repo.
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: eldsolutions
+      MYSQL_USER: eld
+      MYSQL_PASSWORD: CHANGE_ME_DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: CHANGE_ME_ROOT_PASSWORD
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    image: ghcr.io/archyjackson9-cloud/eldsolutions:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      APP_NAME: "ELD Solutions Ltd"
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: CHANGE_ME_APP_KEY
+      APP_URL: http://YOUR_VPS_IP:8080
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: eldsolutions
+      DB_USERNAME: eld
+      DB_PASSWORD: CHANGE_ME_DB_PASSWORD
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      FILESYSTEM_DISK: public
+      MAIL_MAILER: smtp
+      MAIL_SCHEME: smtps
+      MAIL_HOST: smtp.gmail.com
+      MAIL_PORT: "465"
+      MAIL_USERNAME: CHANGE_ME
+      MAIL_PASSWORD: CHANGE_ME
+      MAIL_FROM_ADDRESS: info@eldsolutions.com
+      MAIL_FROM_NAME: "ELD Solutions Ltd"
+      ADMIN_NAME: "ELD Admin"
+      ADMIN_EMAIL: admin@eldsolutions.com 
+      ADMIN_PASSWORD: CHANGE_ME_ADMIN_PASSWORD
+    volumes:
+      - app_storage:/var/www/html/storage
+
+volumes:
+  db_data:
+  app_storage:

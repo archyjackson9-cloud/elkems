@@ -30,7 +30,7 @@ services:
       QUEUE_CONNECTION: sync
       FILESYSTEM_DISK: public
       MAIL_MAILER: "${MAIL_MAILER:-smtp}"
-      MAIL_SCHEME: "${MAIL_SCHEME:-ssl}"
+      MAIL_SCHEME: "${MAIL_SCHEME:-smtps}"
       MAIL_HOST: "${MAIL_HOST:-smtp.gmail.com}"
       MAIL_PORT: "${MAIL_PORT:-465}"
       MAIL_USERNAME: "${MAIL_USERNAME:-}"
